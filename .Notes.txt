@@ -1,0 +1,11 @@
+Reference: https://www.youtube.com/playlist?list=PLL2hlSFBmWwzrhahyQscxASc3ZQFh95xl
+
+
+Basic rest api creation and it's testing using Postman
+Api is created in flask and the link is posted in the query section of 
+postman gui.
+
+Uptill now 3 methods have been created:
+1. get
+2. post
+3. delete
