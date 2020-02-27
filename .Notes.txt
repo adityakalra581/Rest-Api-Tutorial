@@ -1,5 +1,7 @@
 Reference: https://www.youtube.com/playlist?list=PLL2hlSFBmWwzrhahyQscxASc3ZQFh95xl
 
+Github Repository: https://github.com/bradtraversy/flask_sqlalchemy_rest
+
 
 Basic rest api creation and it's testing using Postman
 Api is created in flask and the link is posted in the query section of 
