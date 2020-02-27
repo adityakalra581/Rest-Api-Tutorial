@@ -9,3 +9,29 @@ Uptill now 3 methods have been created:
 1. get
 2. post
 3. delete
+
+
+********************************
+********    27 feb: 12:19pm*****************
+Developing a fully independent Restful Api for Login:
+
+Reference: https://youtu.be/PTZiDnuC86g
+
+
+Using:
+1. flask_sqlalchemy:
+
+pip install Flask-SQLAlchemy
+reference: https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+
+2. flask_marshmallow:
+
+pip install flask-marshmallow
+reference: https://flask-marshmallow.readthedocs.io/en/latest/
+
+3. Connecting sqlalchemy and marshmallow:
+
+pip install marshmallow-sqlalchemy
+
+TIP: Dont follow the tutorial blindly
+     read the errors and rectify those accordingly.
