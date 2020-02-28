@@ -115,3 +115,58 @@ Type "help", "copyright", "credits" or "license" for more information.
 'MOWGLI'
 >>> 
 ******************************************************************
+
+requirements.txt:
+
+
+- It contains all the packages which is required for this project.
+
+- Important whenever you are working on a team.
+
+- pushed on github and the other team member can use it.
+
+command for using it:
+
+pip install -u requirements.txt
+
+How to create it:
+
+1. Go inside the project directory.
+2. Use command:
+
+pip freeze >requirements.txt
+
+this will create a requirements.txt and it will look something like this:
+
+aniso8601==8.0.0
+bcrypt==3.1.7
+certifi==2019.11.28
+cffi==1.14.0
+chardet==3.0.4
+Click==7.0
+Flask==1.1.1
+Flask-Bcrypt==0.7.1
+Flask-Login==0.5.0
+flask-marshmallow==0.11.0
+Flask-RESTful==0.3.8
+Flask-SQLAlchemy==2.4.1
+Flask-WTF==0.14.3
+idna==2.9
+itsdangerous==1.1.0
+Jinja2==2.11.1
+MarkupSafe==1.1.1
+marshmallow==3.5.0
+marshmallow-sqlalchemy==0.22.2
+pkg-resources==0.0.0
+pycparser==2.19
+pytz==2019.3
+requests==2.23.0
+six==1.14.0
+SQLAlchemy==1.3.13
+urllib3==1.25.8
+Werkzeug==1.0.0
+WTForms==2.2.1
+
+
+
+********************************
