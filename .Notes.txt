@@ -170,3 +170,11 @@ WTForms==2.2.1
 
 
 ********************************
+
+
+
+Creating a RESTFul API in Flask With JSON Web Token Authentication and Flask-SQLAlchemy>>>>>>>>
+
+Reference: https://www.youtube.com/watch?v=WxGBoY5iNXY
+
+Haven't tried api.py till now.
