@@ -106,7 +106,7 @@ def delete_login(id):
   db.session.delete(login)
   db.session.commit()
 
-  return login_schema.jsonify(login)
+  return jsonify({'message' : 'User is deleted'})
 
 
 if __name__=="__main__":
