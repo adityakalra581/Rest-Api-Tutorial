@@ -40,11 +40,15 @@ TIP: Dont follow the tutorial blindly
 
 1. app.py: 
 
-- can get login(Specific for specific id)
+- can post data and fetch it accordingly.   ## def add_login(): # method = POST
 
-- can get all the logins (Everything till now)
+- can get login(Specific for specific id).  ## def get_logins(): # method = GET
 
-- can post data and fetch it accordingly.
+- can get all the logins (Everything in the database.)    ## def get_logins(): # method = GET
+
+- can update the login using unique id.     ## def update_login(): # method = PUT
+
+- can delete the login.                     ## def delete_login(): # method = DELETE
 
 *******************
 
@@ -56,3 +60,58 @@ Using Postman to test api:
 
 3. then use the method like GET,POST,DELETE and so on.
 
+*****************************************
+ 
+SQLAlchemy Commands refer this:
+
+## Important: always runthese commands in python.
+
+ reference: https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#deleting-records
+
+ for eg: 
+
+ 1. Initiate Virtual environment using:
+
+ source Project/env_name/bin/activate
+
+ 2. cd into the directory of the main script.
+
+ cd Project/Rest-Api-Tutorial/Rest_api
+
+##### Then just follow the below steps:
+
+(my-project-env) devtron@Vostro:~/Project/Rest-Api-Tutorial/Rest_api$ python
+Python 3.6.9 (default, Nov  7 2019, 10:44:02) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from app import db
+# app here is main script: app.py and db the database instance created.
+
+>>> from app import Login
+# Login here is main class
+# we are importing those methods inside the python environment.
+
+>>> user= Login.query.all()
+>>> user
+[<Login 1>, <Login 2>, <Login 4>]
+>>> user[0]
+<Login 1>
+
+>>> aditya = Login.query.filter_by(name='Aditya Kalra').first()
+>>> aditya.id
+1
+>>> aditya.name
+'Aditya Kalra'
+>>> aditya.email
+'adityakalra667@gmail'
+>>> aditya.password
+'rajaji'
+>>> x = Login.query.filter_by(id=2).first()
+>>> x
+<Login 2>
+>>> x.email
+'jadugar@junglebook'
+>>> x.name
+'MOWGLI'
+>>> 
+******************************************************************

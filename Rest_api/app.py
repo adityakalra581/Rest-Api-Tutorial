@@ -78,7 +78,35 @@ def get_login(id):
     return login_schema.jsonify(login)
 
 
+## Update a login:
+@app.route('/login/<id>',methods=['PUT'])
+def update_login(id):
+    login = Login.query.get(id)
+    name = request.json['name']
+    email = request.json['email']
+    phone = request.json['phone']
+    password = request.json['password']
+    
+    login.name = name
+    login.email = email
+    login.phone = phone
+    login.password = password
 
+    db.session.commit()
+
+    return login_schema.jsonify(login)
+
+
+
+# Deleting a login:
+
+@app.route('/login/<id>', methods=['DELETE'])
+def delete_login(id):
+  login = Login.query.get(id)
+  db.session.delete(login)
+  db.session.commit()
+
+  return login_schema.jsonify(login)
 
 
 if __name__=="__main__":
