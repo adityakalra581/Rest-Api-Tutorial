@@ -37,3 +37,22 @@ pip install marshmallow-sqlalchemy
 
 TIP: Dont follow the tutorial blindly
      read the errors and rectify those accordingly.
+
+1. app.py: 
+
+- can get login(Specific for specific id)
+
+- can get all the logins (Everything till now)
+
+- can post data and fetch it accordingly.
+
+*******************
+
+Using Postman to test api:
+
+1. Download and install it: i have directly installed it from the store in ubuntu.
+
+2. Need to create a request therefore and paste the url of flask server.
+
+3. then use the method like GET,POST,DELETE and so on.
+
