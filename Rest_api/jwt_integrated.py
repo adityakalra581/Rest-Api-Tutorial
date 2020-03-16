@@ -11,7 +11,8 @@ app=Flask(__name__)
 
 ## Setting up Database:
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False     
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'thisissecret'     
 
 ## Initialising the database:
 
@@ -116,6 +117,29 @@ def delete_login(id):
   db.session.commit()
 
   return jsonify({'message' : 'User is deleted'})
+
+
+@app.route('/user')
+def user():
+    auth = request.authorization
+
+    if not auth or not auth.username or not auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+
+    login = Login.query.filter_by(name=auth.username).first()
+
+    if not login:
+        return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+
+    if check_password_hash(login.password, auth.password):
+        token = jwt.encode({'id' : login.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+
+        return jsonify({'token' : token.decode('UTF-8')})
+
+    return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+
+
+
 
 
 if __name__=="__main__":

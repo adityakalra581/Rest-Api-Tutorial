@@ -242,6 +242,11 @@ Authorization Type: Basic Auth
 Enter Username and email and hit send.
 This will generate the Token.
 
+## VERY IMPORTANT: 
+
+New Token is always generated whenever the script is ran.
+So we have to put Token again and again for different methods. 
+
 ***********************************************************************************************
 
 ## Using Tokens to DELETE,GET(ALL),GET(ONE),PROMOTE User/Users:
@@ -252,3 +257,14 @@ STEP 1: In Headers--->
 STEP 2: Use Specific Method with appropriate extensions.
 
 ***********************************************************************************************
+
+### Another Model is created for Orders:
+
+Functionality:
+1. Add Orders
+2. Delete Orders
+3. Get all the Orders.
+4. Get one order.
+
+
+**************************************************************************************
