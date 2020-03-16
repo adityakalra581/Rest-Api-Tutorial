@@ -80,12 +80,21 @@ SQLAlchemy Commands refer this:
 
 ##### Then just follow the below steps:
 
+
+STEP 1: Creating a Database.
+
 (my-project-env) devtron@Vostro:~/Project/Rest-Api-Tutorial/Rest_api$ python
 Python 3.6.9 (default, Nov  7 2019, 10:44:02) 
 [GCC 8.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from app import db
+
 # app here is main script: app.py and db the database instance created.
+
+>>> db.create_all()
+
+## This will create a database.
+
 
 >>> from app import Login
 # Login here is main class
@@ -169,12 +178,77 @@ WTForms==2.2.1
 
 
 
-********************************
+******************************************************************************************
 
-
+All these instructions are specifically for api.py file.
 
 Creating a RESTFul API in Flask With JSON Web Token Authentication and Flask-SQLAlchemy>>>>>>>>
 
 Reference: https://www.youtube.com/watch?v=WxGBoY5iNXY
 
-Haven't tried api.py till now.
+STEP 1: Creating a Database.
+
+(my-project-env) devtron@Vostro:~/Project/Rest-Api-Tutorial/Rest_api$ python
+Python 3.6.9 (default, Nov  7 2019, 10:44:02) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from api import db
+
+# api here is main script: app.py and db the database instance created.
+
+>>> db.create_all()
+
+## This will create a database.
+## Use ctrl+d to exit the python script or just simply type exit() and hit enter.
+
+STEP 2: Accesing that Database in SQL:
+
+
+(my-project-env) devtron@Vostro:~/Project/Rest-Api-Tutorial/Rest_api$ sqlite3 todo.db
+SQLite version 3.22.0 2018-01-22 18:45:57
+Enter ".help" for usage hints.
+sqlite> 
+
+## Incase sqlite is not installed:
+
+use:
+(my-project-env) devtron@Vostro:~/Project/Rest-Api-Tutorial/Rest_api$ sudo apt install sqlite3
+
+******************************************************************************************
+
+Creating Jason Web Tokens:
+
+Step 1: Installing and Importing jwt:
+
+## IMPORTANT: For using Jason Web Tokens
+
+USE:   pip install pyjwt (Remember not to install jwt only.)
+
+[Installing jwt only will cause few errors.
+
+If by chance made the mistake:
+- use: pip uninstall jwt
+- then: pip install pyjwt ]
+
+then import jwt.
+
+STEP 2: Creating the Tokens
+
+In POSTMAN: 
+
+Method = GET
+Authorization Type: Basic Auth
+
+Enter Username and email and hit send.
+This will generate the Token.
+
+***********************************************************************************************
+
+## Using Tokens to DELETE,GET(ALL),GET(ONE),PROMOTE User/Users:
+
+STEP 1: In Headers--->
+          - key: x-access-token       value: "the token generated"
+
+STEP 2: Use Specific Method with appropriate extensions.
+
+***********************************************************************************************
