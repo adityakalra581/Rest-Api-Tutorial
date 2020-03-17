@@ -288,6 +288,8 @@ Functionality:
 **************************************************************************************
 ## Running Flask Script with ngrok
 
+Reference: https://www.youtube.com/watch?v=XgohEG9fqNQ
+
 Step 1: Download ngrok distribution for your system from:
 https://ngrok.com/download
 
@@ -304,4 +306,9 @@ This will open a page which will have the Universal link.
 1. http:// based
 2. https:// based
 
+Which will run on every machine on every server.
+
 ***************************************************************************************
+ngrok for raspberry pi:
+
+https://www.youtube.com/watch?v=_bskdNy38cI
