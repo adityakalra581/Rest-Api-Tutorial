@@ -27,7 +27,7 @@ class Orders(db.Model):
     
 
 class Transactions(db.Model):
-    trans_id = db.Column(db.Integer, primary_key=True)
+    trans_id = db.Column(db.Integer, primary_key=True,nullable=False)
     order_id = db.Column(db.Integer)
     status = db.Column(db.Boolean)
 
@@ -183,7 +183,7 @@ def get_all_orders(current_user):
 
 @app.route('/order/<order_id>', methods=['GET'])
 @token_required
-def get_one_todo(current_user, order_id):
+def get_one_order(current_user, order_id):
     order = Orders.query.filter_by(order_id=order_id).first()
 
     if not order:
@@ -232,6 +232,72 @@ def delete_order(current_user, order_id):
     db.session.commit()
 
     return jsonify({'message' : 'order deleted!'})
+
+
+## For Transactions:
+
+@app.route('/transaction', methods=['GET'])
+@token_required
+def get_all_transactions(current_user):
+    trans = Transactions.query.all()
+
+    if not trans:
+        return jsonify({'message':'No Transaction Found'})
+
+
+    output = []
+
+    for tran in trans:
+        tran_data = {}
+        tran_data['trans_id'] = tran.trans_id
+        tran_data['order_id'] = tran.order_id
+        tran_data['status'] = tran.status
+        output.append(tran_data)
+
+    return jsonify({'trans' : output})
+
+@app.route('/transaction/<trans_id>', methods=['GET'])
+@token_required
+def get_one_trans(current_user, trans_id):
+    trans = Transactions.query.filter_by(trans_id=trans_id).first()
+
+    if not trans:
+        return jsonify({'message' : 'No transaction found!'})
+
+    tran_data = {}
+    tran_data['trans_id'] = tran.trans_id
+    tran_data['source'] = tran.order_id
+    tran_data['status'] = tran.status
+
+    return jsonify(tran_data)
+
+@app.route('/transactions', methods=['POST'])
+# @token_required
+def create_trans():
+    data = request.get_json()
+
+    new_trans = Transactions(order_id=data['order_id'], status=False)
+    db.session.add(new_trans)
+    db.session.commit()
+
+    return jsonify({'message' : "Transaction created!"})
+
+
+@app.route('/transaction/<trans_id>', methods=['DELETE'])
+@token_required
+def delete_trans(current_user, trans_id):
+    trans = Transactions.query.filter_by(trans_id=trans_id,).first()
+
+    if not trans:
+        return jsonify({'message' : 'No Transaction found!'})
+
+    db.session.delete(trans)
+    db.session.commit()
+
+    return jsonify({'message' : 'Transcation deleted!'})
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
