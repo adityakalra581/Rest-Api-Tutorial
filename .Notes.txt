@@ -284,3 +284,24 @@ Functionality:
 
 
 **************************************************************************************
+
+**************************************************************************************
+## Running Flask Script with ngrok
+
+Step 1: Download ngrok distribution for your system from:
+https://ngrok.com/download
+
+Step 2: cd into downloads.
+
+Step 3: Unzip the file and Find the url for accessing the port:
+
+$~ unzip ngrok-stable-linux-amd64.zip
+$~ ./ngrok http 5000
+
+as my port is 5000.
+
+This will open a page which will have the Universal link.
+1. http:// based
+2. https:// based
+
+***************************************************************************************

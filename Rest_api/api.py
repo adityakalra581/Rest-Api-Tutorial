@@ -5,8 +5,10 @@ from werkzeug.security import generate_password_hash, check_password_hash     ##
 import jwt                                                                    ## jason web token
 import datetime
 from functools import wraps
+# from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
+# run_with_ngrok(app)
 
 app.config['SECRET_KEY'] = 'thisissecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
@@ -54,6 +56,11 @@ def token_required(f):
 
     return decorated
 
+@app.route('/' , methods=['GET'])
+def hello():
+    return "Hello"
+
+
 @app.route('/user', methods=['GET'])
 @token_required
 def get_all_users(current_user):
@@ -95,7 +102,7 @@ def get_one_user(current_user, public_id):
 
     return jsonify({'user' : user_data})
 
-@app.route('/user', methods=['POST'])
+@app.route('/user/create', methods=['POST'])
 ## For creating a user only POST is required.
 #@token_required
 def create_user():
@@ -287,7 +294,7 @@ def delete_trans(current_user, trans_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 
 
 """
