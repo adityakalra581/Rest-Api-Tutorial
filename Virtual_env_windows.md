@@ -56,3 +56,11 @@ E:\GITHUB\Bharat_jal_Project>my-venv\Scripts\activate
 (my-venv) E:\GITHUB\Bharat_jal_Project>deactivate
 
 E:\GITHUB\Bharat_jal_Project>
+
+##### Sample Error:
+
+- if you are getting this error ["Cannot Access scripts."](https://stackoverflow.com/questions/56199111/visual-studio-code-cmd-error-cannot-be-loaded-because-running-scripts-is-disabl)
+
+**NOTE: if you are running a project in VSCODE, remember to set powershell as your default terminal or open your cmd as your terminal, like i did.**
+
+![](images/cmd_error.PNG)
