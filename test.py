@@ -30,16 +30,16 @@ class Pet(db.Model):
     owner_name = db.Column(db.Integer, db.ForeignKey('person.name'))
     # location = db.Column(Person)
 
-    def __init__(self, name, owner_name):
-        self.name = name
-        self.owner_name = owner_name
+#     def __init__(self, name, owner_name):
+#         self.name = name
+#         self.owner_name = owner_name
 
-## Device Schema:
-class PetSchema(ma.Schema):
-    class Meta:
-        fields = ('id','name','owner_name')
-## Initialising the Login Schema: 
-pets_schema = PetSchema(many = True)
+# ## Device Schema:
+# class PetSchema(ma.Schema):
+#     class Meta:
+#         fields = ('id','name','owner_name')
+# ## Initialising the Login Schema: 
+# pets_schema = PetSchema(many = True)
 
 
 
@@ -51,15 +51,15 @@ class Person(db.Model):
     created = db.Column(db.DateTime, default = datetime.now())
 
 
-    def __init__(self, name):
-        self.name = name
+#     def __init__(self, name):
+#         self.name = name
 
-## Device Schema:
-class PersonSchema(ma.Schema):
-    class Meta:
-        fields = ('id','name','created')
-## Initialising the Login Schema: 
-person_schema = PersonSchema(many = True)
+# ## Device Schema:
+# class PersonSchema(ma.Schema):
+#     class Meta:
+#         fields = ('id','name','created')
+# ## Initialising the Login Schema: 
+# person_schema = PersonSchema(many = True)
 
 
 @app.route('/')
@@ -71,11 +71,8 @@ def hello():
 def person():
     if request.method == 'POST':
 
-        name = request.json['name']
-        # pets = request.json['pets']
-
-
-        new_person = Person(name)
+        data = request.get_json()
+        new_person = Person(name=data['name'])
 
         db.session.add(new_person)
         db.session.commit()
@@ -84,19 +81,28 @@ def person():
     else:
         
         all_person = Person.query.all()
-        result = person_schema.dump(all_person)
-        return jsonify(result)
-
+        output = []
+        for p in all_person:
+            p_data = {}
+            p_data['id'] = p.id
+            p_data['name'] = p.name
+            # p_data['pets'] = p.pets
+            p_data['created']= p.created
+            output.append(p_data)
+        return jsonify({'person': output})
 
 @app.route('/pets',methods=['GET','POST'])
 def pets():
     
     if request.method == "POST":
 
-        name = request.json['name']
-        owner_name = request.json['owner_name']
+        data = request.get_json()
+        new_pet = Pet(name=data['name'], 
+                        owner_name=data['owner_name'])
+        # name = request.json['name']
+        # owner_name = request.json['owner_name']
 
-        new_pet = Pet(name,owner_name)
+        # new_pet = Pet(name,owner_name)
 
         db.session.add(new_pet)
         db.session.commit()
@@ -104,9 +110,15 @@ def pets():
         return jsonify({'message' : 'New Pet Added!'})
 
     else:
-        all_fillups = Pet.query.all()
-        result = pets_schema.dump(all_fillups)
-        return jsonify(result)
+        all_pets = Pet.query.all()
+        output = []
+        for p in all_pets:
+            p_data = {}
+            p_data['id'] = p.id
+            p_data['name'] = p.name
+            p_data['owner_name'] = p.owner_name
+            output.append(p_data)
+        return jsonify({'Pets': output})
 
 
 ## So if we want to find the Person with their pets:
