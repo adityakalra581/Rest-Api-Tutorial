@@ -12,7 +12,7 @@
 
 - This repository contains various files. The file structure of this repository looks like this:
 
-![](images/file-structure.png)
+![](images/file-structure.PNG)
 
 - The first file to look into is **app.py** present in Rest_api directory.
 
