@@ -5,7 +5,7 @@
 **Command: python or py**
 
 
-E:\GITHUB\Bharat_jal_Project>py
+E:\GITHUB\Bharat_jal_Project>python
 Python 3.8.3 (tags/v3.8.3:6f8c832, May 13 2020, 22:20:19) [MSC v.1925 32 bit (Intel)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
@@ -14,15 +14,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ### Step 2. Installation
 
-- **Command: py -m venv environment_name**
+- **Command: python -m venv environment_name**
 
-- Remember here py is for activating python.
+- Remember here python is for activating python.
 
 C:\Users\user>e:
 
 E:\>cd GITHUB\Bharat_jal_Project
 
-E:\GITHUB\Bharat_jal_Project>py -m venv my-venv
+E:\GITHUB\Bharat_jal_Project>python -m venv my-venv
 
 E:\GITHUB\Bharat_jal_Project>dir
  Volume in drive E is Projects
@@ -41,7 +41,7 @@ E:\GITHUB\Bharat_jal_Project>dir
 
 ### Step 3: Activating and Deactivating Virtual Environment.
 
-- 1. Activate:
+**- Activate:**
 
 - **Command: env_name\Scripts\activate**
 
@@ -49,13 +49,21 @@ E:\GITHUB\Bharat_jal_Project>my-venv\Scripts\activate
 
 **(my-venv)** E:\GITHUB\Bharat_jal_Project>
 
-- 2. Deactivate:
+**- Deactivate:**
 
 - **Command: deactivate**
 
 (my-venv) E:\GITHUB\Bharat_jal_Project>deactivate
 
 E:\GITHUB\Bharat_jal_Project>
+
+### Step 4: Installing requirements from requirements.txt
+
+- **command: pip install -r requirements.txt**
+
+- make sure you cd into the directory of requirements.txt with environment activated.
+
+**- for example: (my-venv) E:\GITHUB\Bharat_jal_Project\Flask_server>pip install -r requirements.txt**
 
 ##### Sample Error:
 
