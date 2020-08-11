@@ -15,7 +15,7 @@ from flask_marshmallow import Marshmallow
 import os
 import uuid                                                                   ## For generating random public id.
 from werkzeug.security import generate_password_hash, check_password_hash     ## for password hashing
-import jwt                                                                    ## jason web token
+import jwt                                                                    ## json web token
 import datetime
 from functools import wraps
 
@@ -148,7 +148,7 @@ If you did not make this request then simply ignore this email and no changes wi
 '''
     mail.send(msg)
 
-@app.route("/update_password", methods=['POST'])
+@app.route("/forgot-password", methods=['GET','POST'])
 def reset_request():
     # if current_user.is_authenticated:
     #     return redirect(url_for('home'))
@@ -162,7 +162,7 @@ def reset_request():
     # return render_template('reset_request.html', title='Reset Password', form=form)
 
 
-@app.route("/reset_password/<token>", methods=['GET','PUT'])
+@app.route("/reset-password/<token>", methods=['GET','PUT'])
 def reset_token(token):
     # if current_user.is_authenticated:
     #     return redirect(url_for('home'))
