@@ -6,6 +6,7 @@
 ## 1. Creating a subquery in SQLAlchemy which will give the frequency of deliveries on specific dates in Desc order.
 ## 2. Converting GPS cordinates into location and store it in db.
 ## 3. Migrating Database.
+## 4. Creating a subquery in SQLAlchemy which will give the answer of "Which locations deliveries are generally high"
 
 ## IMPORTS:
 
@@ -31,8 +32,8 @@ from sqlalchemy import func, distinct, desc
 import geopy
 from geopy import Nominatim
 
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
+# from flask_script import Manager
+# from flask_migrate import Migrate, MigrateCommand
 
 # ***************************************************************
 
@@ -47,10 +48,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-migrate = Migrate(app, db)
-manager = Manager(app)
+# migrate = Migrate(app, db)
+# manager = Manager(app)
 
-manager.add_command('db', MigrateCommand)
+# manager.add_command('db', MigrateCommand)
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -134,15 +135,30 @@ def get_deliveries():
 
     return jsonify({'deliveries' : output})
 
- ## Query: SELECT date, COUNT(date) AS Frequency FROM Deliveries GROUP BY date ORDER BY COUNT(date) DESC
 
-#  db.session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()
+# *************************************************
+
+## Question: On which days deliveries were highest”
+
+## Query: SELECT date, COUNT(date) AS Frequency FROM Deliveries GROUP BY date ORDER BY COUNT(date) DESC
+
+##  db.session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()
 
 
 @app.route('/delivery/date', methods=['GET'])
 def date_del():
     date = db.session.query(Deliveries.date, func.count(Deliveries.date)).group_by(Deliveries.date).order_by(func.count(Deliveries.date).desc()).all()
     return str(date)
+
+
+
+## Query: Which locations deliveries are generally high
+
+@app.route('/delivery/area', methods=['GET'])
+def area_del():
+    area = db.session.query(Deliveries.area, func.count(Deliveries.area)).group_by(Deliveries.area).order_by(func.count(Deliveries.area).desc()).all()
+    return str(area)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
