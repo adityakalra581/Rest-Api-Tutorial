@@ -1,6 +1,12 @@
 ## TEST SCRIPT:
 ## Version 3.0
 
+## TASKS:
+
+## 1. Creating a subquery in SQLAlchemy which will give the frequency of deliveries on specific dates in Desc order.
+## 2. Converting GPS cordinates into location and store it in db.
+## 3. Migrating Database.
+
 ## IMPORTS:
 
 import flask
@@ -21,8 +27,12 @@ from flask_cors import CORS
 
 from sqlalchemy import func, distinct, desc
 
-# from flask_script import Manager
-# from flask_migrate import Migrate, MigrateCommand
+## For cordinates to location.
+import geopy
+from geopy import Nominatim
+
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
 # ***************************************************************
 
@@ -36,6 +46,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
+manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -51,6 +66,7 @@ class Deliveries(db.Model):
     amount = db.Column(db.Integer)
     temp = db.Column(db.Float(10))
     location = db.Column(db.String(100))
+    area = db.Column(db.String(100))
     timestamp = db.Column(db.DateTime, default = datetime.datetime.now())
     date = db.Column(db.String(50), default = datetime.date.today().strftime("%d/%m/%Y"))
     time = db.Column(db.String(50), default = datetime.datetime.now().time().strftime("%H:%M:%S"))
@@ -83,7 +99,8 @@ def create_delivery():
 
     data = request.get_json()
     new_del = Deliveries(driver_name=data['driver_name'], driver_email=data['driver_email'], amount=data['amount'], 
-                    temp=data['temp'], location=data['location'],date=data['date'])
+                    temp=data['temp'], location=data['location'],date=data['date']
+                    ,area=Nominatim(user_agent='test/1').reverse(data['location']).address.split(',')[0])
     db.session.add(new_del)
     db.session.commit()
     return jsonify({'message' : 'New Delivery created!'})
@@ -109,6 +126,7 @@ def get_deliveries():
         del_data['amount'] = i.amount
         del_data['temp'] = i.temp
         del_data['location'] = i.location
+        del_data['area'] = i.area
         del_data['timestamp'] = i.timestamp
         del_data['date'] = i.date
         del_data['time'] = i.time
@@ -128,3 +146,4 @@ def date_del():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # manager.run()
