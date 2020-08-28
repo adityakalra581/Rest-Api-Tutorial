@@ -54,3 +54,4 @@ print(sample['address']['county'])
 ## Dadri
 
 print((Nominatim(user_agent='test/1').reverse("28.58601421313013,77.35868469660956").raw)['address']['county'])
+print(Nominatim(user_agent='test/1').reverse("28.7162092, 77.1170743").raw)
