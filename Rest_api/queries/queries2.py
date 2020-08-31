@@ -165,7 +165,7 @@ def get_deliveries():
 
 @app.route('/delivery/date', methods=['GET'])
 def date_del():
-    date = db.session.query(Deliveries.date, func.count(Deliveries.date), Deliveries.day).group_by(Deliveries.date).order_by(func.count(Deliveries.date).desc()).all()
+    date = db.session.query(Deliveries.date, func.count(Deliveries.date), Deliveries.day).group_by(Deliveries.date, Deliveries.day).order_by(func.count(Deliveries.date).desc()).all()
     return str(date)
 
 
@@ -183,7 +183,7 @@ def date_del():
 
 @app.route('/delivery/locality', methods=['GET'])
 def locality_del():
-    location = db.session.query(Deliveries.locality, func.count(Deliveries.locality), Deliveries.city).group_by(Deliveries.locality).order_by(func.count(Deliveries.locality).desc()).all()
+    location = db.session.query(Deliveries.locality, func.count(Deliveries.locality), Deliveries.city).group_by(Deliveries.locality, , Deliveries.city).order_by(func.count(Deliveries.locality).desc()).all()
     return str(location)
 
 
